@@ -4,6 +4,10 @@
  */
 package com.entrypoint.library;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
+
 /**
  *
  * @author ricca
@@ -32,6 +36,17 @@ public class Book {
     }
     public void setGenres(String genres) {
         this.genres = genres;
+    }
+    
+    
+    public Map<String,String> GetMapData(){
+        Map<String,String> toReturn = new HashMap<>();
+        
+        toReturn.put("Name",name);
+        toReturn.put("Author",authors);
+        toReturn.put("Genre",genres);
+
+        return toReturn;
     }
     
     public String getName() {

@@ -1,6 +1,7 @@
 package com.entrypoint.library;
 
 import java.util.ArrayList;
+import java.util.Map;
 
 public class Controller {
     private ArrayList<Book> Books;
@@ -33,7 +34,26 @@ public class Controller {
     }
     
     
+    public void LoadData(){
+        FileManager a = new FileManager("LocalSaves");
+        Books.clear();
+        Books = a.Load();
+    }
+    public void SaveData(){
+        FileManager a = new FileManager("LocalSaves");
+        a.GetData(GetJsonData());
+        a.Write();
+    }
+    
     public ArrayList<Book> GetList(){
         return Books;
+    }
+    public ArrayList<Map<String,String>> GetJsonData(){
+        ArrayList<Map<String,String>> toReturn = new ArrayList<Map<String,String>>();
+        
+        for(Book a : Books)
+            toReturn.add(a.GetMapData());
+        
+        return toReturn;
     }
 }

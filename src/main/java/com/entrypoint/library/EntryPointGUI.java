@@ -1,11 +1,22 @@
 package com.entrypoint.library;
 
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import org.json.simple.parser.ParseException;
+
 public class EntryPointGUI extends javax.swing.JFrame {
-    Controller myController = new Controller(); 
-    Boolean ThisFrameVisible = true;
-    Boolean AddFrameVisible = false;
-    Boolean ModFrameVisible = false;
-    Boolean RemoveFrameVisible = false;
+    //Variables
+        Controller myController = new Controller(); 
+        Boolean ThisFrameVisible = true;
+        Boolean AddFrameVisible = false;
+        Boolean ModFrameVisible = false;
+        Boolean RemoveFrameVisible = false;
+    //Variables
+        
+        
+        
     
     private void PrintBooks(){
         String toPrint = new String();
@@ -21,20 +32,14 @@ public class EntryPointGUI extends javax.swing.JFrame {
                         " Genre : "+a.getGenres() +
                         "\n----------------------------------------------------------------------------------------------------\n"
                     );
-        
-        System.out.println(toPrint);
         TextBox.setText(toPrint);
     }
+        
+        
     public EntryPointGUI() {
         initComponents();
-        //TESTING COMPONENTS
-        Book first = new Book("Harry potter","Fantasy","JK R");
-        Book second = new Book("La Coscienza di Zeno","Psicology","Svevo");
-        Book third = new Book("Hunger Games","Fantasy","SOMEONE");
-        myController.AddBook(first);
-        myController.AddBook(second);
-        myController.AddBook(third);
-        //TESTING COMPONENTS        
+       
+        
     }
 
     @SuppressWarnings("unchecked")
@@ -69,6 +74,8 @@ public class EntryPointGUI extends javax.swing.JFrame {
         addB = new javax.swing.JButton();
         modB = new javax.swing.JButton();
         editB = new javax.swing.JButton();
+        SaveButton = new javax.swing.JButton();
+        LoadButton = new javax.swing.JButton();
 
         jTextArea1.setColumns(20);
         jTextArea1.setRows(5);
@@ -172,6 +179,12 @@ public class EntryPointGUI extends javax.swing.JFrame {
             }
         });
 
+        autMod.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                autModActionPerformed(evt);
+            }
+        });
+
         jLabel4.setText("Name");
 
         jLabel5.setText("Author");
@@ -241,6 +254,9 @@ public class EntryPointGUI extends javax.swing.JFrame {
         removeBlock.addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowActivated(java.awt.event.WindowEvent evt) {
                 removeBlockWindowActivated(evt);
+            }
+            public void windowClosing(java.awt.event.WindowEvent evt) {
+                removeBlockWindowClosing(evt);
             }
         });
 
@@ -331,23 +347,47 @@ public class EntryPointGUI extends javax.swing.JFrame {
             }
         });
 
+        SaveButton.setText("Save Books");
+        SaveButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                SaveButtonActionPerformed(evt);
+            }
+        });
+
+        LoadButton.setText("Load Books");
+        LoadButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                LoadButtonActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, 267, Short.MAX_VALUE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(addB, javax.swing.GroupLayout.DEFAULT_SIZE, 245, Short.MAX_VALUE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(modB, javax.swing.GroupLayout.DEFAULT_SIZE, 247, Short.MAX_VALUE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(editB, javax.swing.GroupLayout.DEFAULT_SIZE, 247, Short.MAX_VALUE))
-            .addGroup(layout.createSequentialGroup()
                 .addGap(6, 6, 6)
                 .addComponent(jScrollPane2)
                 .addGap(6, 6, 6))
+            .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(LoadButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 236, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(addB, javax.swing.GroupLayout.PREFERRED_SIZE, 213, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(modB, javax.swing.GroupLayout.PREFERRED_SIZE, 215, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(editB, javax.swing.GroupLayout.PREFERRED_SIZE, 216, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(SaveButton, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(78, 78, 78))
         );
+
+        layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {SaveButton, addB, editB, jButton1, modB});
+
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
@@ -356,9 +396,12 @@ public class EntryPointGUI extends javax.swing.JFrame {
                     .addComponent(addB)
                     .addComponent(modB)
                     .addComponent(editB)
-                    .addComponent(jButton1))
-                .addGap(18, 18, 18)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 436, Short.MAX_VALUE)
+                    .addComponent(jButton1)
+                    .addComponent(SaveButton))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(LoadButton)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 420, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -366,7 +409,7 @@ public class EntryPointGUI extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        PrintBooks();
+       PrintBooks();
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void addBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addBActionPerformed
@@ -445,7 +488,7 @@ public class EntryPointGUI extends javax.swing.JFrame {
           if(Genre.isEmpty())
             Genre = myController.GetList().get(jComboBox1.getSelectedIndex()).getGenres();
         
-        myController.ModBook(name, Genre, Author, jComboBox1.getSelectedIndex());
+        myController.ModBook(name, Author, Genre , jComboBox1.getSelectedIndex());
         ThisFrameVisible = true;
         ModFrameVisible = false;
          modBlock.setVisible(ModFrameVisible);
@@ -505,6 +548,25 @@ public class EntryPointGUI extends javax.swing.JFrame {
         this.setVisible(ThisFrameVisible);
     }//GEN-LAST:event_jButton2ActionPerformed
 
+    private void removeBlockWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_removeBlockWindowClosing
+         // TODO add your handling code here:
+        ThisFrameVisible = true;
+        this.setVisible(ThisFrameVisible);
+    }//GEN-LAST:event_removeBlockWindowClosing
+
+    private void SaveButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SaveButtonActionPerformed
+        myController.SaveData();
+    }//GEN-LAST:event_SaveButtonActionPerformed
+
+    private void LoadButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LoadButtonActionPerformed
+        myController.LoadData();
+        PrintBooks();
+    }//GEN-LAST:event_LoadButtonActionPerformed
+
+    private void autModActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_autModActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_autModActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -541,7 +603,9 @@ public class EntryPointGUI extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton LoadButton;
     private javax.swing.JButton MOD;
+    private javax.swing.JButton SaveButton;
     private javax.swing.JTextArea TextBox;
     private javax.swing.JButton addB;
     private javax.swing.JFrame addBlock;

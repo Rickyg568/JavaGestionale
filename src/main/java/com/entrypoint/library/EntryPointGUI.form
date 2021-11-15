@@ -210,6 +210,9 @@
           </Events>
         </Component>
         <Component class="javax.swing.JTextField" name="autMod">
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="autModActionPerformed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JTextField" name="genMod">
         </Component>
@@ -252,6 +255,7 @@
       </Properties>
       <Events>
         <EventHandler event="windowActivated" listener="java.awt.event.WindowListener" parameters="java.awt.event.WindowEvent" handler="removeBlockWindowActivated"/>
+        <EventHandler event="windowClosing" listener="java.awt.event.WindowListener" parameters="java.awt.event.WindowEvent" handler="removeBlockWindowClosing"/>
       </Events>
 
       <Layout>
@@ -339,18 +343,27 @@
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" attributes="0">
-              <Component id="jButton1" pref="267" max="32767" attributes="0"/>
-              <EmptySpace max="-2" attributes="0"/>
-              <Component id="addB" pref="245" max="32767" attributes="0"/>
-              <EmptySpace min="-2" max="-2" attributes="0"/>
-              <Component id="modB" pref="247" max="32767" attributes="0"/>
-              <EmptySpace min="-2" max="-2" attributes="0"/>
-              <Component id="editB" pref="247" max="32767" attributes="0"/>
-          </Group>
-          <Group type="102" attributes="0">
               <EmptySpace min="6" pref="6" max="-2" attributes="0"/>
               <Component id="jScrollPane2" max="32767" attributes="0"/>
               <EmptySpace min="6" pref="6" max="-2" attributes="0"/>
+          </Group>
+          <Group type="102" alignment="0" attributes="0">
+              <Group type="103" groupAlignment="1" max="-2" attributes="0">
+                  <Group type="102" alignment="0" attributes="0">
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="LoadButton" max="32767" attributes="0"/>
+                  </Group>
+                  <Component id="jButton1" linkSize="1" min="-2" pref="236" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace min="-2" max="-2" attributes="0"/>
+              <Component id="addB" linkSize="1" min="-2" pref="213" max="-2" attributes="0"/>
+              <EmptySpace min="-2" max="-2" attributes="0"/>
+              <Component id="modB" linkSize="1" min="-2" pref="215" max="-2" attributes="0"/>
+              <EmptySpace min="-2" max="-2" attributes="0"/>
+              <Component id="editB" linkSize="1" min="-2" pref="216" max="-2" attributes="0"/>
+              <EmptySpace max="32767" attributes="0"/>
+              <Component id="SaveButton" linkSize="1" min="-2" pref="93" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="78" max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -363,9 +376,12 @@
                   <Component id="modB" alignment="2" min="-2" max="-2" attributes="0"/>
                   <Component id="editB" alignment="2" min="-2" max="-2" attributes="0"/>
                   <Component id="jButton1" alignment="2" min="-2" max="-2" attributes="0"/>
+                  <Component id="SaveButton" alignment="2" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace type="separate" max="-2" attributes="0"/>
-              <Component id="jScrollPane2" pref="436" max="32767" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
+              <Component id="LoadButton" min="-2" max="-2" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
+              <Component id="jScrollPane2" pref="420" max="32767" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
           </Group>
       </Group>
@@ -418,6 +434,22 @@
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="editBActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JButton" name="SaveButton">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Save Books"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="SaveButtonActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JButton" name="LoadButton">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Load Books"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="LoadButtonActionPerformed"/>
       </Events>
     </Component>
   </SubComponents>
