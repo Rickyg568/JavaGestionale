@@ -1,61 +1,127 @@
 /*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+ * Class : Book
+ *
+ * Version info : 0.2.0
+ *
+ * Copyright notice : none
  */
 package com.entrypoint.library;
-
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
 /**
+ * Abstraction of books.
  *
- * @author ricca
+ * @version 0.2 16 Nov 2021
+ * @author Riccardo Grassi
  */
+
 public class Book {
-
-   
-    private String name,authors;
-    private String genres;
+    //Variables
+    private String title; 
+    private ArrayList<String> authors;
+    private ArrayList<String> genres;
     
-    public Book(String name,String genres,String authors)
-    {
-        this.name = name;
-        this.genres = genres;
-        this.authors = authors;
+    /*
+    *   Public constructor.
+    *   Variations:
+    *       -Clone
+    *       -New initialization
+    */
+    
+    public Book(){
+        title = new String();
+        authors = new ArrayList<>();
+        genres = new ArrayList<>();
     }
-
-    
-    
-    
-    public void setName(String name) {
-        this.name = name;
+    public Book(Book clone){
+        title = clone.title;
+        authors = clone.authors;
+        genres = clone.genres;
     }
-    public void setAuthors(String authors) {
-        this.authors = authors;
-    }
-    public void setGenres(String genres) {
-        this.genres = genres;
-    }
-    
-    
-    public Map<String,String> GetMapData(){
-        Map<String,String> toReturn = new HashMap<>();
+    public Book(String Title, ArrayList<String> Authors, ArrayList<String> Genres){
+        if(!Title.isEmpty())
+            title = Title;
+        else
+            title = "null value";
         
-        toReturn.put("Name",name);
-        toReturn.put("Author",authors);
-        toReturn.put("Genre",genres);
-
-        return toReturn;
+        if(!Authors.isEmpty())
+            authors = Authors;
+        else
+            authors = new ArrayList<>();
+        
+        if(!Genres.isEmpty())
+            genres = Genres;
+        else
+            genres = new ArrayList<>();        
     }
     
-    public String getName() {
-        return name;
+    /*
+    *   Setters.
+    *   Variations:
+    *       -None
+    */
+    public void _setTitle(String Title) {
+        title = Title;
     }
-    public String getAuthors() {
+    public void _setAuthors(ArrayList<String> Authors) {
+        authors = Authors;
+    }
+    public void _setGenres(ArrayList<String> Genres) {
+        genres = Genres;
+    }
+    
+    /*
+    *   Getters.
+    *   Variations:
+    *       -None
+    */
+    public String _getTitle() {
+        return title;
+    }
+    public ArrayList<String> _getAuthors() {
         return authors;
     }
-    public String getGenres() {
+    public ArrayList<String> _getGenres() {
         return genres;
+    }
+    
+    /*
+    *   Map data For Json Encoding.
+    *   Variations:
+    *       -None
+    */
+    public ArrayList<Map<String,String>> GetMapData(){
+        //Variables Needed
+        ArrayList<Map<String,String>> mapData = new ArrayList<>();
+        Map<String,String> tmp = new HashMap<>();
+        int counter = 1;
+        
+        // 0 -> title   
+        tmp.put("Title", title);
+        mapData.add(tmp);
+        tmp = new HashMap<>();
+        
+        // 1 -> authors
+        for (String aut : authors){
+            tmp.put(String.valueOf(counter),aut);
+            counter++;
+        }
+        mapData.add(tmp);
+        tmp = new HashMap<>();
+        counter = 1;
+        // 2 -> genres
+        for (String gen : genres){
+            tmp.put(String.valueOf(counter),gen);
+            counter++;
+        }
+        mapData.add(tmp);
+         new HashMap<>();
+        
+        
+        
+        
+        return mapData;
     }
 }
